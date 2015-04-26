@@ -1,0 +1,74 @@
+.clov-list {
+	margin-top: 2em;
+}
+	.clov-list ul,
+	.clov-list .clov-sortable-table,
+	.clov-list .clov-empty {
+		margin-bottom: 0.5em;
+	}
+
+
+.clov-sortable-table {
+	width: 100%;
+}
+
+
+/**
+ * Sort indicators.
+ */
+.clov-sortable-table-active-sort-asc a::after,
+.clov-sortable-table-active-sort-desc a::after {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 6px;
+	margin-right: 6px;
+	vertical-align: middle;
+	content: "";
+}
+.clov-sortable-table-active-sort-asc a::after {
+	border-bottom: 4px solid hsla(0, 0%, 50%, 0.5);
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
+.clov-sortable-table-active-sort-desc a::after {
+	border-top: 4px solid hsla(0, 0%, 50%, 0.5);
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
+
+
+.clov-compose-form {
+	overflow-y: hidden; /* Clearfix. */
+}
+	.clov-compose-form .clov-cancel-link,
+	.clov-compose-form [type="submit"] {
+		float: right;
+		margin-left: 0.5em;
+	}
+
+
+.clov-control-group {
+	clear: both;
+	margin: 1em 0;
+	overflow-y: hidden; /* Clearfix. */
+}
+	.clov-control-group > label {
+		float: left;
+		width: 140px;
+		text-align: right;
+	}
+	.clov-control-group .clov-controls {
+		margin-left: 160px;
+	}
+	.clov-control-group button,
+	.clov-control-group input,
+	.clov-control-group select,
+	.clov-control-group textarea {
+		margin: 0;
+	}
+
+
+[data-href] {
+	cursor: pointer;
+}

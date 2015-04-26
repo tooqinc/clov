@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+	
+	<!-- Settings for the user & users attribute types. -->
+	<table name="atUserSettings">
+		<field name="akID" type="I" size="10">
+			<key />
+			<unsigned />
+		</field>
+		<field name="akGID" type="I" size="10">
+			<unsigned />
+			<default value="NULL" />
+		</field>
+	</table>
+	
+	<!-- Data for UserAttributePermissionAccessEntity. -->
+	<table name="PermissionAccessEntityUserAttributes">
+		<field name="peID" type="I" size="10">
+			<notnull />
+			<unsigned />
+		</field>
+		<field name="akHandle" type="C" size="255"></field>
+		<index name="akHandle">
+			<col>akHandle</col>
+		</index>
+	</table>
+
+</schema>

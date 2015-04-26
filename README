@@ -1,0 +1,145 @@
+Technical Overview
+==================
+
+Clov is a simple project management package. It offers features such as 
+timesheet management, invoice & expense tracking, a simple task list, and 
+project budgeting.
+
+Clov is designed to integrate seamlessly into an existing site and to be easily 
+customizable/extensible; this is partly accomplished by making use of many 
+built-in Concrete5 features.
+
+The code is heavily commented and taking a peek at the source is encouraged if 
+you can't find enough information here. Feedback, patches, bug reports, etc are 
+very much appreciated.
+
+Clov requires Concrete5 5.6.0.2+ and PHP 5.3+.
+
+
+Page Types
+----------
+
+Most of Clov's user data is stored in attributes on custom page types. The 
+"schema" for these page types are laid out in 
+`ClovPackage::getPageTypeSpecifications()`. This is a good first place to look 
+to get an understanding of Clov's data model.
+
+Creation/editing of instances of these page types is handled very similarly to 
+Concrete5's composer feature, except that it happens through a single page 
+interface instead of in the Concrete5 dashboard. Permissions & attributes 
+follow many of the same rules as composer.
+
+To allow fine-grained page permissions, Clov's page type instances inherit 
+permissions from their master collections.
+
+
+Attribute Types
+---------------
+
+In addition to making heavy use of Concrete5's stock attribute types. Clov 
+implements a few custom types:
+
+ - money_amount
+   
+   A monetary amount, plain and simple. Formatting can be specified with the 
+   MONEY_AMOUNT_LOCALE configuration option, whose value should be a standard 
+   POSIX [locale](http://en.wikipedia.org/wiki/Locale) identifier. You can 
+   check which specific locales are supported by taking a look at 
+   clov/config/localeconv.utf8.php.
+
+ - project
+   
+   A page of type "clov_project". This is used to tie other Clov pages (e.g. 
+   expenses) to specific projects.
+
+ - user
+   
+   Attributes of this type are used to store named user relationships (e.g. 
+   user who paid an expense). The user_attribute access entity allows 
+   specifying page permissions based on the value of this attribute.
+
+ - users
+   
+   Exactly like the user attribute type, but can store a list of users in a 
+   single attribute (e.g. the project assignees attribute). Also usable with 
+   the user_attribute access entity.
+
+
+Single Pages
+------------
+
+The first Clov page you will likely encounter is the dashboard single page, 
+under which all other Clov pages live in the sitemap.
+
+There are also single pages associated with each Clov page type. Page type 
+instances are published underneath their single page, and the single pages are 
+used to list these page type instances as well as to create/edit them (via a 
+composer-like system). Most of Clov's business logic lives in the controllers 
+for these single pages, contrary to the page type instances which generally act 
+as simple sets of attributes that know how to display themselves. For example, 
+the address /clov/projects points to a single page with a list of projects. You 
+would visit /clov/projects/-/add to add a new project ("add" is a controller 
+action), and /clov/projects/project-name to view a particular project.
+
+
+Block Types
+-----------
+
+Clov also comes with a few block types. These are mostly used to filter/list 
+the various page types. The blocks that Clov sets up during installation can be 
+edited/removed for easy customization, and since all pages use standard areas 
+other blocks can be added as well.
+
+
+The User Attribute Access Entity
+--------------------------------
+
+Clov implements a custom access entity that allows permissions to depend on the 
+values in user/users page attributes. This is used to restrict permissions 
+based on user-page relationships like task assignee, project managers, etc.
+
+
+Groups
+------
+
+Clov makes use of three user groups: Administrators, Project Managers, and 
+Employees. These groups will be automatically created during Clov's 
+installation if they do not already exist, but they are not removed when 
+uninstalling. The groups are used in permissions and for filtering users. Each 
+user who needs to access Clov should be a member of at least one of these 
+groups.
+
+
+Configuration
+-------------
+
+There is a package configuration file with a few options located at 
+clov/config/package.php. It works similarly to the site.php config file. The 
+file is only used at install time; you can dig into the database to update the 
+options later, but keep in mind that the DEFAULT_TIME_CODES option only 
+*matters* at install time; changing it won't have the desired effect since the 
+time code attributes have already been created.
+
+
+CSS
+---
+
+Clov's visual design is meant to strike a balance between usability and not 
+clashing with the site theme, erring towards minimalism whenever possible. 
+Selectors used in package CSS are are namespaced to prevent collisions, but 
+some themes' styles may have higher precedence than Clov's and override them.
+
+Clov ships with two small stylesheets:
+
+ - basic.css
+   
+   Styles considered to be necessary; Clov will probably appear visually broken 
+   if this stylesheet is left out.
+
+ - bling.css
+   
+   Styles meant to serve as usability enhancements on top of basic.css.
+   If you're interested in reskinning Clov you may want to remove or edit this 
+   stylesheet (of course you can always add styles on top of it as well, most 
+   of its selectors have fairly low specificity).
+
