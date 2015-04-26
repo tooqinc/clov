@@ -1,0 +1,27 @@
+
+                            
+/* TEAM */                        
+Brian MacKay: UX Design, Bits of CSS, Testing, Funding                        
+Site: http://tooq.ca                         
+Twitter: @tooq                          
+Location: Edmonton, Alberta, Canada
+
+Your title: Matt Kantor                       
+Site: https://github.com/mkantor                       
+Location: San Francisco, California, USA
+                
+                        [...]
+												
+/* THANKS */
+							
+Name: Matt Kantor - Matt was contracted to build Clov a few years ago and did a great job. 
+
+I don't much time or inclination to carry forward with it at this point and so I release it as an open source project under the MIT licence for the Concrete5 community to carry on with it or ignore it.
+
+Thanks to everyone at Concrete5 and in the C5 community. 
+
+                        [...]
+                                                    
+/* SITE */                           
+Last update: 2015/04/26    
+Standards: HTML5, CSS3, PHP, JS
